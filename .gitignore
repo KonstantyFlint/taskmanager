@@ -1,2 +1,14 @@
-*.idea
+__pycache__/
+*.py[cod]
+*$py.class
+
+*.log
+*.pot
 *.pyc
+.env
+
+.idea/
+*.iml
+*.iws
+*.ipr
+.idea_modules/
