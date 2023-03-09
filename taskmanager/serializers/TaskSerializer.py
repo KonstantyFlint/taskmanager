@@ -12,4 +12,4 @@ class TaskSerializer(ModelSerializer):
 class ShortTaskSerializer(ModelSerializer):
     class Meta:
         model = Task
-        fields = ['name', 'status', 'user']
+        fields = ['id', 'name', 'status', 'user']

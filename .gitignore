@@ -11,3 +11,6 @@ __pycache__/
 *.iws
 *.ipr
 .idea_modules/
+
+
+/taskmanager/migrations/
