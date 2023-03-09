@@ -17,6 +17,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     username = md.CharField(max_length=30, unique=True)
     first_name = md.CharField(max_length=50)
     last_name = md.CharField(max_length=50)
+    is_staff = md.BooleanField(default=False)
 
     USERNAME_FIELD = "username"
 

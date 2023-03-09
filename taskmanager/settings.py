@@ -116,7 +116,7 @@ AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.ModelBackend',
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Warsaw'
 
 USE_I18N = True
 
@@ -155,3 +155,4 @@ SIMPLE_JWT = {
 }
 
 AUTH_USER_MODEL = 'taskmanager.User'
+SIMPLE_HISTORY_USER_MODEL = 'taskmanager.User'

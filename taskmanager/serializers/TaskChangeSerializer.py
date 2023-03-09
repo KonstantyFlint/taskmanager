@@ -6,7 +6,8 @@ from taskmanager.models.Task import Task
 class HistoricalTaskSerializer(ModelSerializer):
     class Meta:
         model = Task.history.model
-        fields = ['id', 'history_id', 'name', 'description', 'status', 'user']
+        fields = ['id', 'history_id', 'history_user', 'history_type', 'history_date', 'name', 'description', 'status', 'user']
+        ordering = ['history_date']
 
 
 class ShortHistoricalTaskSerializer(ModelSerializer):

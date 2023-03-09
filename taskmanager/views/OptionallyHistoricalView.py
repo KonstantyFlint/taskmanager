@@ -2,6 +2,11 @@ from django.core.exceptions import ImproperlyConfigured
 
 
 class OptionallyHistoricalView:
+    """
+    View mix-in for time travel.
+    Shows current state if "as_of" query param is unspecified.
+    Shows historical states if "as_of" contains a valid date-time string.
+    """
     historical_manager = None
     as_of_field = "as_of"
 
