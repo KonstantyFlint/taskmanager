@@ -2,7 +2,7 @@ from django.urls import path, include
 
 from taskmanager.views.TaskChangesView import SingleTaskChangesView, AllTaskChangesView
 from taskmanager.views.UserView import UserListView, UserRetrieveUpdateDestroyView, UserRegisterView
-from taskmanager.views.Auth import UserLoginView, UserLogoutView
+from taskmanager.views.AuthView import UserLoginView, UserLogoutView
 from taskmanager.views.TaskView import TaskListCreateView, TaskRetrieveUpdateDestroyView
 
 users = include([
