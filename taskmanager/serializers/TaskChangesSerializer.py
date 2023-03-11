@@ -3,7 +3,7 @@ from rest_framework.serializers import ModelSerializer
 from taskmanager.models.Task import Task
 
 
-class HistoricalTaskSerializer(ModelSerializer):
+class TaskChangesSerializer(ModelSerializer):
     class Meta:
         model = Task.history.model
         fields = ['id', 'history_id', 'history_user', 'history_type', 'history_date', 'name', 'description', 'status', 'user']

@@ -1,14 +1,12 @@
-from django.http import JsonResponse
 from django.urls import reverse_lazy
 from django.views.generic import RedirectView
-from rest_framework.views import APIView
 from rest_framework_simplejwt.views import TokenObtainPairView
 
-from taskmanager.serializers.Auth import CustomTokenObtainPairSerializer
+from taskmanager.serializers.AuthSerializer import AuthSerializer
 
 
-class JWTLoginView(TokenObtainPairView):
-    serializer_class = CustomTokenObtainPairSerializer
+class UserLoginView(TokenObtainPairView):
+    serializer_class = AuthSerializer
 
     def post(self, request, *args, **kwargs):
         response = super().post(request, *args, **kwargs)
@@ -24,7 +22,7 @@ class JWTLoginView(TokenObtainPairView):
         return response
 
 
-class JWTLogoutView(RedirectView):
+class UserLogoutView(RedirectView):
     url = reverse_lazy('users')
 
     def get(self, request, *args, **kwargs):
