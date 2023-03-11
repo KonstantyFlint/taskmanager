@@ -8,7 +8,7 @@
 App runs on localhost:8000.<br>
 `Filter`, `Pagination` and `Search` fields are shown in Django Form returned by server.<br>
 `Model` fields for creating and updating models are shown in the Form as well.<br>
-`Date-Time` field for querying historical data **IS NOT** provided in the Form and needs to be entered by hand. See [tasks/](README.md#L32).
+`Date-Time` field for querying historical data **IS NOT** provided in the Form and needs to be entered by hand. See `tasks/` endpoint.
 
 # Endpoints
 
