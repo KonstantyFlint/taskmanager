@@ -1,5 +1,7 @@
 from django.urls import reverse_lazy
 from django.views.generic import RedirectView
+from rest_framework_simplejwt.token_blacklist.models import BlacklistedToken
+from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenObtainPairView
 
 from taskmanager.serializers.AuthSerializer import AuthSerializer
@@ -28,6 +30,10 @@ class UserLogoutView(RedirectView):
     def get(self, request, *args, **kwargs):
         response = super().get(request, *args, **kwargs)
         response.message = "Logged out successfully"
+        user = self.request.user
+        if user and user.is_authenticated:
+            blacklisted = BlacklistedToken(token=str(user.outstanding_token))
+            blacklisted.save()
         response.delete_cookie("refresh_token")
         response.delete_cookie("access_token")
         return response
