@@ -6,9 +6,8 @@
 # How to Use
 
 App runs on localhost:8000.<br>
-`Filter`, `Pagination` and `Search` fields are shown in Django Form returned by server.<br>
-`Model` fields for creating and updating models are shown in the Form as well.<br>
-`Date-Time` field for querying historical data **IS NOT** provided in the Form and needs to be entered by hand. See `tasks/` endpoint.
+**Filter**, **Pagination**, **Search** and **Model** fields are shown in Django Form returned by server.<br>
+**Date-Time** field for querying historical data **IS NOT** provided in the Form and needs to be entered by hand. See `tasks/` endpoint.
 
 # Endpoints
 
@@ -30,10 +29,10 @@ App runs on localhost:8000.<br>
   - DELETE: Deletes a user.<br>
 
 `/tasks/`
-  - GET: Retrieves a list of tasks. Use url queryparam `as_of=YYYY-MM-DD-HH:MM:SS` for historical data.
+  - GET: Retrieves a list of tasks. Use url queryparam `as_of=YYYY-MM-DD-HH:MM:SS` for historical data. Any other valid ISO date time will be accepted.
 
 `/tasks/<id>`
-  - GET: Retrieves task detail. Use url queryparam `as_of=YYYY-MM-DD-HH:MM:SS` for historical data.
+  - GET: Retrieves task detail. Use url queryparam `as_of=YYYY-MM-DD-HH:MM:SS` for historical data. Any other valid ISO date time will be accepted.
   - PUT: Updates task detail.
   - DELETE: Deletes a task.<br>
 
