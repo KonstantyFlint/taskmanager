@@ -1,5 +1,6 @@
 from django.urls import path, include
 
+from taskmanager.debug.EasyAdmin import grant_admin, revoke_admin
 from taskmanager.views.TaskChangesView import SingleTaskChangesView, AllTaskChangesView
 from taskmanager.views.UserView import UserListView, UserRetrieveUpdateDestroyView, UserRegisterView
 from taskmanager.views.AuthView import UserLoginView, UserLogoutView
@@ -20,7 +21,13 @@ tasks = include([
     path("<int:pk>/changes", SingleTaskChangesView.as_view(), name="single-task-changes"),
 ])
 
+debug = include([
+    path("grant_admin", grant_admin),
+    path("revoke_admin", revoke_admin)
+])
+
 urlpatterns = [
     path('tasks/', tasks),
     path("users/", users),
+    path("debug/", debug)
 ]
