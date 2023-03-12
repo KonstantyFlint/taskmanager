@@ -25,4 +25,4 @@ class UserRegisterView(CreateAPIView):
 class UserRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = [ IsAuthenticated & (IsAdminUser | IsAccountOwner) | ReadOnly]
+    permission_classes = [ IsAdminUser | IsAccountOwner | ReadOnly]

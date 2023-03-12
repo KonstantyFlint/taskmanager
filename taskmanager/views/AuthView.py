@@ -1,7 +1,6 @@
 from django.urls import reverse_lazy
 from django.views.generic import RedirectView
 from rest_framework_simplejwt.token_blacklist.models import BlacklistedToken
-from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenObtainPairView
 
 from taskmanager.serializers.AuthSerializer import AuthSerializer

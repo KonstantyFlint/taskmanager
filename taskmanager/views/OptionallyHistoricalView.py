@@ -1,7 +1,8 @@
-from django.core.exceptions import ImproperlyConfigured, ValidationError
+from dateutil.parser import isoparse
+from django.core.exceptions import ImproperlyConfigured
 from rest_framework.exceptions import ValidationError as RESTValidationError
 from rest_framework.generics import GenericAPIView
-from datetime import datetime
+
 
 class OptionallyHistoricalView(GenericAPIView):
     """
@@ -16,23 +17,24 @@ class OptionallyHistoricalView(GenericAPIView):
         self.validate_as_of(request.query_params.get(self.as_of_field))
         return super().get(self, request, *args, **kwargs)
 
-    def get_queryset(self):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         if not self.historical_manager:
             raise ImproperlyConfigured("historical_manager' must be defined")
 
-        as_of_date = self.request.query_params.get(self.as_of_field, None)
-        if as_of_date:
-            try:
-                return self.historical_manager.as_of(as_of_date)
-            except ValidationError:
-                return self.historical_manager.none()
-        else:
+    def get_queryset(self):
+        as_of = self.request.query_params.get(self.as_of_field, None)
+
+        if not as_of:
             return super().get_queryset()
+        else:
+            return self.historical_manager.as_of(as_of)
 
     def validate_as_of(self, as_of):
-        if as_of:
-            error_message = "as_of parameter doesn't match YYYY-MM-DD-HH:MM:SS format"
-            try:
-                datetime.strptime(as_of, "%Y-%m-%d-%H:%M:%S")
-            except ValueError:
-                raise RESTValidationError(error_message)
+        error_message = "as_of parameter doesn't match ISO date format"
+        if not as_of:
+            return
+        try:
+            isoparse(as_of)
+        except ValueError as e:
+            raise RESTValidationError(error_message + ": " + str(e))
