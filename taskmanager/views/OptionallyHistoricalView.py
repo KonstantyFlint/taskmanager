@@ -1,5 +1,5 @@
 from dateutil.parser import isoparse
-from django.core.exceptions import ImproperlyConfigured
+from django.core.exceptions import ImproperlyConfigured, ValidationError
 from rest_framework.exceptions import ValidationError as RESTValidationError
 from rest_framework.generics import GenericAPIView
 
@@ -27,8 +27,10 @@ class OptionallyHistoricalView(GenericAPIView):
 
         if not as_of:
             return super().get_queryset()
-        else:
+        try:
             return self.historical_manager.as_of(as_of)
+        except ValidationError:
+            return self.historical_manager.none()
 
     def validate_as_of(self, as_of):
         error_message = "as_of parameter doesn't match ISO date format"
